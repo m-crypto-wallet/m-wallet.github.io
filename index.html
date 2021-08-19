@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>M-WALLET | Bitcoin Wallet</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description" content="Bitcoin Wallet">
+    <meta name="keywords" content="bitcoin, wallet, btc">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="css/common.css">
+    <script language='JavaScript' type='text/javascript' src='javascript/common.js'></script>
+    <script language='JavaScript' type='text/javascript' src='javascript/hashes.js'></script>
+    <script language='JavaScript' type='text/javascript' src='javascript/jsbn.js'></script>
+    <script language='JavaScript' type='text/javascript' src='javascript/elliptic.js'></script>
+    <script language='JavaScript' type='text/javascript' src='javascript/btc.js'></script>
+    <script language='JavaScript' type='text/javascript' src='javascript/backend_bci.js'></script>
+    <script src="javascript/password_check/Mellt.js"></script>
+    <!-- Make sure common-passwords.js is included AFTER Mellt.js -->
+    <script src="javascript/password_check/common-passwords.js"></script>
+    <style id="antiClickjack">body{display:none !important;}</style>
+    <script type="text/javascript">
+        if (self === top) {
+            var antiClickjack = document.getElementById("antiClickjack");
+            antiClickjack.parentNode.removeChild(antiClickjack);
+        } else {
+            top.location = self.location;
+        }
+    </script>
+</head>
+<body style="font-family: sans-serif;">
+<div id="wrapper">
+    <div id="container" class="center-text">
+        <span id="close" onclick="location.reload()" title="sign out"><img src="images/close_button.svg" /></span>
+        <div id="content">
+            <img src="images/M.png" width="200px;">
+            <h1 style="font-size: 45px;">M-Wallet</h1>
+            <p>Этот биткойн-кошелек полностью работает в вашем браузере.</p>
+
+            <form id="pass_form" action="javascript:open_wallet();">
+                <p>Чтобы открыть кошелек, введите кодовую фразу.</p>
+                <input id="passphrase" type="password" placeholder="Кодовая фраза или приватный ключ" title="Можете использовать приватный ключ...">
+                <br>
+                <br>
+                <button type="submit" class="button">
+                <span class="button__text">
+                Открыть
+  <svg class="button__svg" role="presentational" viewBox="0 0 600 600">
+    <defs>
+      <clipPath id="myClip">
+        <rect x="0" y="0" width="100%" height="50%" />
+      </clipPath>
+    </defs>
+    <g clip-path="url(#myClip)">
+      <g id="money">
+        <path d="M441.9,116.54h-162c-4.66,0-8.49,4.34-8.62,9.83l.85,278.17,178.37,2V126.37C450.38,120.89,446.56,116.52,441.9,116.54Z" fill="#699e64" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+        <path d="M424.73,165.49c-10-2.53-17.38-12-17.68-24H316.44c-.09,11.58-7,21.53-16.62,23.94-3.24.92-5.54,4.29-5.62,8.21V376.54H430.1V173.71C430.15,169.83,427.93,166.43,424.73,165.49Z" fill="#699e64" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+      </g>
+      <g id="creditcard">
+        <path d="M372.12,181.59H210.9c-4.64,0-8.45,4.34-8.58,9.83l.85,278.17,177.49,2V191.42C380.55,185.94,376.75,181.57,372.12,181.59Z" fill="#a76fe2" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+        <path d="M347.55,261.85H332.22c-3.73,0-6.76-3.58-6.76-8v-35.2c0-4.42,3-8,6.76-8h15.33c3.73,0,6.76,3.58,6.76,8v35.2C354.31,258.27,351.28,261.85,347.55,261.85Z" fill="#ffdc67" />
+        <path d="M249.73,183.76h28.85v274.8H249.73Z" fill="#323c44" />
+      </g>
+    </g>
+    <g id="wallet">
+      <path d="M478,288.23h-337A28.93,28.93,0,0,0,112,317.14V546.2a29,29,0,0,0,28.94,28.95H478a29,29,0,0,0,28.95-28.94h0v-229A29,29,0,0,0,478,288.23Z" fill="#a4bdc1" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+      <path d="M512.83,382.71H416.71a28.93,28.93,0,0,0-28.95,28.94h0V467.8a29,29,0,0,0,28.95,28.95h96.12a19.31,19.31,0,0,0,19.3-19.3V402a19.3,19.3,0,0,0-19.3-19.3Z" fill="#a4bdc1" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+      <path d="M451.46,435.79v7.88a14.48,14.48,0,1,1-29,0v-7.9a14.48,14.48,0,0,1,29,0Z" fill="#a4bdc1" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+      <path d="M147.87,541.93V320.84c-.05-13.2,8.25-21.51,21.62-24.27a42.71,42.71,0,0,1,7.14-1.32l-29.36-.63a67.77,67.77,0,0,0-9.13.45c-13.37,2.75-20.32,12.57-20.27,25.77l.38,221.24c-1.57,15.44,8.15,27.08,25.34,26.1l33-.19c-15.9,0-28.78-10.58-28.76-25.93Z" fill="#7b8f91" />
+      <path d="M148.16,343.22a6,6,0,0,0-6,6v92a6,6,0,0,0,12,0v-92A6,6,0,0,0,148.16,343.22Z" fill="#323c44" />
+    </g>
+
+  </svg>
+                </button>
+                <div class="hint" id="days_to_crack"></div>
+            </form>
+
+            <form id="send_form" action="javascript:send_tx();">
+                <div class="left-text">
+                    <p>Чтобы внести средства в свой кошелек, отправьте биткойн на этот адрес:</p>
+                    <span id="adr"></span>
+                    <div>
+                        <h2 id="balance">Баланс: </h2>
+                        <span id="transactions"></span>
+                    </div>
+                    <div>
+                        <input id="to" type="text" placeholder="Адрес получателя">
+                        <br>
+                        <br>
+                        <input id="amount" type="text" placeholder="Количество BTC">
+                        <br>
+                        <br>
+                        <button type="submit" class="button">
+                <span class="button__text">
+                    Отправить
+  <svg class="button__svg" role="presentational" viewBox="0 0 600 600">
+    <defs>
+      <clipPath id="myClip">
+        <rect x="0" y="0" width="100%" height="50%" />
+      </clipPath>
+    </defs>
+    <g clip-path="url(#myClip)">
+      <g id="money">
+        <path d="M441.9,116.54h-162c-4.66,0-8.49,4.34-8.62,9.83l.85,278.17,178.37,2V126.37C450.38,120.89,446.56,116.52,441.9,116.54Z" fill="#699e64" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+        <path d="M424.73,165.49c-10-2.53-17.38-12-17.68-24H316.44c-.09,11.58-7,21.53-16.62,23.94-3.24.92-5.54,4.29-5.62,8.21V376.54H430.1V173.71C430.15,169.83,427.93,166.43,424.73,165.49Z" fill="#699e64" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+      </g>
+      <g id="creditcard">
+        <path d="M372.12,181.59H210.9c-4.64,0-8.45,4.34-8.58,9.83l.85,278.17,177.49,2V191.42C380.55,185.94,376.75,181.57,372.12,181.59Z" fill="#a76fe2" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+        <path d="M347.55,261.85H332.22c-3.73,0-6.76-3.58-6.76-8v-35.2c0-4.42,3-8,6.76-8h15.33c3.73,0,6.76,3.58,6.76,8v35.2C354.31,258.27,351.28,261.85,347.55,261.85Z" fill="#ffdc67" />
+        <path d="M249.73,183.76h28.85v274.8H249.73Z" fill="#323c44" />
+      </g>
+    </g>
+    <g id="wallet">
+      <path d="M478,288.23h-337A28.93,28.93,0,0,0,112,317.14V546.2a29,29,0,0,0,28.94,28.95H478a29,29,0,0,0,28.95-28.94h0v-229A29,29,0,0,0,478,288.23Z" fill="#a4bdc1" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+      <path d="M512.83,382.71H416.71a28.93,28.93,0,0,0-28.95,28.94h0V467.8a29,29,0,0,0,28.95,28.95h96.12a19.31,19.31,0,0,0,19.3-19.3V402a19.3,19.3,0,0,0-19.3-19.3Z" fill="#a4bdc1" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+      <path d="M451.46,435.79v7.88a14.48,14.48,0,1,1-29,0v-7.9a14.48,14.48,0,0,1,29,0Z" fill="#a4bdc1" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+      <path d="M147.87,541.93V320.84c-.05-13.2,8.25-21.51,21.62-24.27a42.71,42.71,0,0,1,7.14-1.32l-29.36-.63a67.77,67.77,0,0,0-9.13.45c-13.37,2.75-20.32,12.57-20.27,25.77l.38,221.24c-1.57,15.44,8.15,27.08,25.34,26.1l33-.19c-15.9,0-28.78-10.58-28.76-25.93Z" fill="#7b8f91" />
+      <path d="M148.16,343.22a6,6,0,0,0-6,6v92a6,6,0,0,0,12,0v-92A6,6,0,0,0,148.16,343.22Z" fill="#323c44" />
+    </g>
+
+  </svg>
+                </button>
+                    </div>
+                </div>
+                <div id="status"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var tx, keys, fee = 0.0001,
+        mellt;
+
+    function balance_cb(amount) {
+        if (isNaN(amount)) amount = '?'; else amount = js.format_money(amount, 8);
+
+        $('balance').innerHTML = "<span title='click to refresh' onclick='refresh(true);' style='cursor:pointer'>Баланс: <b id=amt>" + amount + "</b> BTC</span>";
+        $('transactions').innerHTML = "<a class='button-secondary' href='" + backend.adr_page + keys.adr + "' target=_blank><span>Транзакции</span></a>";
+    }
+
+    function refresh(set_amount) {
+        if (set_amount) $('amt').innerHTML = '?';
+
+        backend.get_balance(keys.adr, balance_cb);
+    }
+
+    function open_wallet() {
+        var pass = js.trim($('passphrase').value);
+        if (pass.length < 1) return;
+
+        keys = btc.get_keys(pass);
+
+        $('pass_form').hide();
+        $('send_form').show();
+        $('close').show();
+        $('to').focus();
+
+        $('adr').innerHTML = "<b>" + keys.adr + "</b>&ndash; <a href='javascript:show_wif()'><span id='key_action'>Показать</span> приватный ключ </a><br><span id=wif></span>";
+        refresh();
+        setInterval(refresh, 60000);
+    }
+
+    function show_wif() {
+        if ($('wif').innerHTML == '') {
+            $('wif').innerHTML = keys.wif;
+            $('key_action').innerHTML = 'Спрятать';
+        } else {
+            $('wif').innerHTML = '';
+            $('key_action').innerHTML = 'Показать';
+        }
+    }
+
+    function broadcast_cb(res) {
+        if (res === '') {
+            $('to').value = '';
+            $('amount').value = '';
+            $('status').innerHTML = '<a target="_blank" href="https://blockchain.info/tx/' + tx.txid() + '" target=_blank>Transaction</a> sent.';
+        }
+        else $('status').innerHTML = 'Ошибка: ' + res;
+
+        tx = null;
+        js.enable_form('send_form', true);
+        setTimeout(refresh, 1000);
+    }
+
+    function broadcast() {
+        var status = $('status');
+        status.innerHTML = 'Создание транзакции...';
+
+        var signed = tx.sign(keys);
+
+        status.innerHTML = 'Подтверждение...';
+
+        backend.send(signed, broadcast_cb);
+    }
+
+    function unspent_cb(utxo) {
+        if (utxo !== false) {
+            var total = tx.add_unspent(utxo), err = '';
+
+            var tx_total = tx.amount + fee;
+
+            if (total >= tx_total) {
+                var change = total - tx_total;
+
+                if (change > 0.000001) tx.add_output(keys.adr, change);
+
+                setTimeout(broadcast, 300);
+
+                return;
+            }
+            else err = 'Недостаточно денег! Нужно ' + js.format_money(tx_total - total, 8) + ' BTC';
+        }
+        else err = 'Не удалось получить результат :(';
+
+        tx = null;
+        js.enable_form('send_form', true);
+        $('status').innerHTML = err;
+    }
+
+    function send_tx() {
+        var dst = js.trim($('to').value), amount = parseFloat(js.trim($('amount').value));
+
+        if (dst === '' || btc.decode_adr(dst) === false || isNaN(amount)) return;
+
+        if (confirm('Send ' + amount + ' BTC to ' + dst + '?')) {
+            tx = btc.new_tx();
+
+            tx.add_output(dst, amount);
+
+            js.enable_form('send_form', false);
+
+            $('status').innerHTML = 'Getting unspent outputs...';
+
+            backend.get_utxo(keys.adr, unspent_cb);
+        }
+    }
+
+    if (!JSON || !JSON.parse) alert("Ваш браузер не поддерживает собственное декодирование JSON. Эта страница не будет работать, извините.");
+    else {
+        var x = new XMLHttpRequest();
+
+        if ('withCredentials' in x) {
+//            $('backend').innerHTML = backend.link;
+            $('pass_form').show();
+            var passphrase = $('passphrase');
+            passphrase.focus();
+            mellt = new Mellt();
+            passphrase.addEventListener('input', function () {
+                var pass = js.trim($('passphrase').value);
+                var daysToCrack = mellt.CheckPassword(pass);
+                var days_to_crack = $('days_to_crack');
+                if (daysToCrack < 0) {
+                    days_to_crack.innerHTML = 'Введенный вами пароль - один из наиболее часто используемых паролей в мире. Вы не должны использовать этот пароль.'
+                } else {
+                    var years;
+                    if (daysToCrack > 365) {
+                        years = Math.round(daysToCrack / 365 * 10) / 10;
+                        if (years > 1000000) {
+                            years = (Math.round(years / 1000000 * 10) / 10) + ' million'
+                        } else if (years > 1000) {
+                            years = (Math.round(years / 1000)) + ' thousand'
+                        }
+                    }
+                    days_to_crack.innerHTML = 'Это займет примерно ' + (daysToCrack === 1000000000 ? '>' : '')
+                        + (years ? years + ' лет' : daysToCrack + ' дней')
+                        + ' чтобы взломать этот пароль.';
+                }
+                days_to_crack.style.color = daysToCrack > 7 ? (days_to_crack < 30 ? '#AF7817' : 'green') : '#c03';
+            });
+        }
+        else alert("Your browser doesn't support Cross-Origin Resource Sharing. This page will not work, sorry.");
+    }
+</script>
+</body>
+</html>
