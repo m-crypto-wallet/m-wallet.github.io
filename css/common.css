@@ -1,0 +1,202 @@
+html {
+    height: 100%;
+}
+
+#wrapper {
+    padding: 5vh;
+    min-height: calc(90vh - 75px - 80px);
+}
+
+#container {
+    margin: 0 auto;
+    max-width: 55vw;
+    padding: 5px 10px;
+    box-shadow: 0 0 8px #c2c2c2;
+}
+
+#content {
+    padding: 30px;
+}
+
+form input {
+    padding: 8px;
+}
+
+#pass_form input {
+    width: 60%;
+}
+
+#send_form {
+    display: none;
+}
+
+#wif {
+    color: #44484c;
+}
+
+.left-text {
+    text-align: left;
+}
+
+#balance {
+    display: inline-block;
+}
+
+#close {
+    float: right;
+    display: none;
+}
+
+#close:hover {
+    cursor: pointer;
+}
+
+#amount {
+    width: 30%;
+}
+
+#to {
+    width: 48%;
+}
+
+#transactions {
+    margin-left: 15px;
+}
+
+#footer {
+    font-size: 70%;
+    padding: 20px;
+    height: 40px;
+    text-align: justify;
+}
+
+.content-inverse-color a {
+    text-decoration: underline;
+}
+
+#adr {
+    font-size: 85%;
+}
+
+@media screen and (max-width: 959px) {
+    #footer {
+        height: 100%;
+    }
+    #container {
+        max-width: 85vw;
+    }
+    #to {
+        width: 70%;
+        display: block;
+        margin: 0 auto;
+    }
+    #amount, #send_form button {
+        display: block;
+        margin: 10px auto;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #transactions {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+    #to {
+        margin-top: 20px;
+    }
+    #pass_form input {
+        width: auto;
+        margin-bottom: 10px;
+    }
+    #content {
+        padding: 10px;
+    }
+    #adr {
+        font-size: 65%;
+    }
+}
+@media (hover: hover) {
+  #creditcard {
+    /*  set start position */
+    transform: translateY(110px);
+    transition: transform 0.1s ease-in-out;
+    /*  set transition for mouse enter & exit */
+  }
+
+  #money {
+    /*  set start position */
+    transform: translateY(180px);
+    transition: transform 0.1s ease-in-out;
+    /*  set transition for mouse enter & exit */
+  }
+
+  button:hover #creditcard {
+    transform: translateY(0px);
+    transition: transform 0.2s ease-in-out;
+    /*  overide transition for mouse enter */
+  }
+
+  button:hover #money {
+    transform: translateY(0px);
+    transition: transform 0.3s ease-in-out;
+    /*  overide transition for mouse enter */
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.25rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.button:hover .button__text span {
+  transform: translateY(-0.25rem);
+  transition: transform .2s ease-in-out;
+}
+
+/* styling */
+
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  border: none;
+  outline: none;
+  background-color: purple;
+  padding: 1rem 90px 1rem 2rem;
+  position: relative;
+  border-radius: 8px;
+  letter-spacing: 0.7px;
+  background-color: #5086bd;
+  color: #fff;
+  font-size: 21px;
+  font-family: "Lato", sans-serif;
+  cursor: pointer;
+  box-shadow: rgba(0, 9, 61, 0.2) 0px 4px 8px 0px;
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.button__svg {
+  position: absolute;
+  overflow: visible;
+  bottom: 6px;
+  right: 0.2rem;
+  height: 140%;
+}
+
